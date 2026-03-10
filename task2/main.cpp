@@ -19,24 +19,31 @@ void middleToList(list<int>& L, vector<int>& V)
     L.erase(it);
 }
 
+void printList(const list<int>& L)
+{
+    cout << "List: ";
+    for (int x : L) cout << x << " ";
+}
+
+void printVector(const vector<int>& V)
+{
+    cout << "Vector: ";
+    for (int x : V) cout << x << " ";
+}
+
 int main(void){
     list<int> L = {1, 2, 3, 9, 10};
     vector<int> V = {1, 2, 3, 4};
 
     cout << "Init vector and list" << endl;
-
-    cout << "L: ";
-    for (int x : L) cout << x << " ";
-    cout << "\nV: ";
-    for (int x : V) cout << x << " ";
+    printVector(V);
+    printList(L);
 
     middleToList(L, V);
     cout << "\nVector and list after moving middle element to end of vector:" << endl;
     
-    cout << "L: ";
-    for (int x : L) cout << x << " ";
-    cout << "\nV: ";
-    for (int x : V) cout << x << " ";
+    printVector(V);
+    printList(L);
 
     return 0;
 }
