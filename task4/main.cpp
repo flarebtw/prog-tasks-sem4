@@ -3,6 +3,13 @@
 #include <algorithm>
 #include <functional>
 
+void printVector(const std::vector<int>& vec) {
+    for (const auto& elem : vec) {
+        std::cout << elem << " ";
+    }
+    std::cout << std::endl;
+}
+
 using namespace std;
 
 int main() {
@@ -14,12 +21,9 @@ int main() {
     cout << "K = " << K << endl;
 
     cout << "V1: ";
-    for_each(V1.begin(), V1.end(), [](int x){ cout << x << " "; });
-    cout << endl;
-
+    printVector(V1);
     cout << "V2: ";
-    for_each(V2.begin(), V2.end(), [](int x){ cout << x << " "; });
-    cout << endl;
+    printVector(V2);
 
     transform(
         V1.begin(), V1.end(),
@@ -38,7 +42,7 @@ int main() {
 
     cout << "V1 после преобразования (V1[i] * K + V2[i]):" << endl;
     cout << "V1: ";
-    for_each(V1.begin(), V1.end(), [](int x){ cout << x << " "; });
+    printVector(V1);
     cout << endl;
 
     return 0;
