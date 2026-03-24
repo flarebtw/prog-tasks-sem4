@@ -10,14 +10,32 @@ void printVector(const std::vector<int>& vec) {
     std::cout << std::endl;
 }
 
+void inputVector(vector<int>& vec, const string& name) {
+    cout << "Enter vector elements " << name << " (" << vec.size() << " ):" << endl;
+    for (size_t i = 0; i < vec.size(); ++i) {
+        cout << "  " << name << "[" << i << "] = ";
+        cin >> vec[i];
+    }
+}
+
 using namespace std;
 
 int main() {
-    const int K = 3;
+    int K = 0;
+    size_t n = 0;
 
-    vector<int> V1 = {1, 2, 3, 4, 5};
-    vector<int> V2 = {10, 20, 30, 40, 50};
+    cout << "Enter vector size (N): ";
+    cin >> n;
 
+    cout << "Enter K value: ";
+    cin >> K;
+
+    vector<int> V1(n);
+    vector<int> V2(n);
+
+    inputVector(V1, "V1");
+    inputVector(V2, "V2");
+    
     cout << "K = " << K << endl;
 
     cout << "V1: ";
