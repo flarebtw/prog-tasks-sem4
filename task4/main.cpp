@@ -2,6 +2,9 @@
 #include <vector>
 #include <algorithm>
 #include <functional>
+#include <iterator>
+#include <sstream>
+#include <stdexcept>
 
 void printVector(const std::vector<int>& vec) {
     for (const auto& elem : vec) {
@@ -10,40 +13,59 @@ void printVector(const std::vector<int>& vec) {
     std::cout << std::endl;
 }
 
-using namespace std;
+std::vector<int> readVector(const std::string& prompt) {
+    std::cout << prompt;
+    std::string line;
+    std::getline(std::cin, line);
+    std::istringstream stream(line);
+    return std::vector<int>(
+        std::istream_iterator<int>(stream),
+        std::istream_iterator<int>()
+    );
+}
 
 int main() {
-    const int K = 3;
+    int K;
+    std::cout << "Введите K: ";
+    std::cin >> K;
+    std::cin.ignore();
 
-    vector<int> V1 = {1, 2, 3, 4, 5};
-    vector<int> V2 = {10, 20, 30, 40, 50};
+    std::vector<int> V1 = readVector("Введите элементы V1: ");
+    std::vector<int> V2 = readVector("Введите элементы V2: ");
 
-    cout << "K = " << K << endl;
+    if (V1.size() != V2.size()) {
+        throw std::logic_error("Размеры V1 и V2 должны совпадать!");
+    }
 
-    cout << "V1: ";
-    printVector(V1);
-    cout << "V2: ";
-    printVector(V2);
+    std::cout << "\nK = " << K << std::endl;
 
-    transform(
+    std::cout << "V1: ";
+    std::copy(V1.begin(), V1.end(), std::ostream_iterator<int>(std::cout, " "));
+    std::cout << std::endl;
+
+    std::cout << "V2: ";
+    std::copy(V2.begin(), V2.end(), std::ostream_iterator<int>(std::cout, " "));
+    std::cout << std::endl;
+
+    std::transform(
         V1.begin(), V1.end(),
         V2.begin(),
         V1.begin(),
-        bind(
-            plus<int>(),
-            bind(
-                multiplies<int>(),
-                placeholders::_1,
+        std::bind(
+            std::plus<int>(),
+            std::bind(
+                std::multiplies<int>(),
+                std::placeholders::_1,
                 K
             ),
-            placeholders::_2
+            std::placeholders::_2
         )
     );
 
-    cout << "V1 после преобразования (V1[i] * K + V2[i]):" << endl;
-    cout << "V1: ";
-    printVector(V1);
-    cout << endl;
+    std::cout << "\nV1 после преобразования (V1[i] * K + V2[i]):" << std::endl;
+    std::cout << "V1: ";
+    std::copy(V1.begin(), V1.end(), std::ostream_iterator<int>(std::cout, " "));
+    std::cout << std::endl;
 
     return 0;
 }
