@@ -6,25 +6,12 @@
 #include <sstream>
 #include <stdexcept>
 
-void printVector(const std::vector<int>& vec) {
-    for (const auto& elem : vec) {
-        std::cout << elem << " ";
-    }
-}
+void printVector(const std::vector<int>& vec);
 
-std::vector<int> readVector(const std::string& prompt) {
-    std::cout << prompt;
-    std::string line;
-    std::getline(std::cin, line);
-    std::istringstream stream(line);
-    return std::vector<int>(
-        std::istream_iterator<int>(stream),
-        std::istream_iterator<int>()
-    );
-}
+std::vector<int> readVector(const std::string& prompt);
 
 int main(void) {
-    int K;
+    int K = 0;
     std::cout << "Введите K: ";
     std::cin >> K;
     std::cin.ignore();
@@ -65,4 +52,21 @@ int main(void) {
     std::cout << std::endl;
 
     return 0;
+}
+
+void printVector(const std::vector<int>& vec) {
+    for (const auto& elem : vec) {
+        std::cout << elem << " ";
+    }
+}
+
+std::vector<int> readVector(const std::string& prompt) {
+    std::cout << prompt;
+    std::string line;
+    std::getline(std::cin, line);
+    std::istringstream stream(line);
+    return std::vector<int>(
+        std::istream_iterator<int>(stream),
+        std::istream_iterator<int>()
+    );
 }
