@@ -10,7 +10,6 @@ void printVector(const std::vector<int>& vec) {
     for (const auto& elem : vec) {
         std::cout << elem << " ";
     }
-    std::cout << std::endl;
 }
 
 std::vector<int> readVector(const std::string& prompt) {
@@ -24,7 +23,7 @@ std::vector<int> readVector(const std::string& prompt) {
     );
 }
 
-int main() {
+int main(void) {
     int K;
     std::cout << "Введите K: ";
     std::cin >> K;
@@ -40,12 +39,10 @@ int main() {
     std::cout << "\nK = " << K << std::endl;
 
     std::cout << "V1: ";
-    std::copy(V1.begin(), V1.end(), std::ostream_iterator<int>(std::cout, " "));
-    std::cout << std::endl;
+    printVector(V1);
 
     std::cout << "V2: ";
-    std::copy(V2.begin(), V2.end(), std::ostream_iterator<int>(std::cout, " "));
-    std::cout << std::endl;
+    printVector(V2);
 
     std::transform(
         V1.begin(), V1.end(),
@@ -64,7 +61,7 @@ int main() {
 
     std::cout << "\nV1 после преобразования (V1[i] * K + V2[i]):" << std::endl;
     std::cout << "V1: ";
-    std::copy(V1.begin(), V1.end(), std::ostream_iterator<int>(std::cout, " "));
+    printVector(V1);
     std::cout << std::endl;
 
     return 0;
